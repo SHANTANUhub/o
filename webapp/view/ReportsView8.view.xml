@@ -1,0 +1,102 @@
+<mvc:View
+    controllerName="project3.controller.ReportsView8"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:core="sap.ui.core">
+ <ScrollContainer height="100%" vertical="true" horizontal="false">
+    
+    <VBox class="sapUiMediumMargin pro">
+<Panel headerText="Analytics View"  class="sapUiMediumMarginBottom filterPanel ">
+        <!-- Filter Bar -->
+        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+    <DateRangeSelection id="dateRange" placeholder="Select Date Range" />
+    <Select id="categorySelect" width="200px" class="sapUiSmallMarginBegin" change=".onCategoryChange">
+        <items>
+            <core:Item key="" text="All Categories"/>
+            <!-- Categories will be dynamically bound later -->
+        </items>
+    </Select>
+    <Button text="Apply Filters" press=".onApplyFilters" class="sapUiSmallMarginBegin" />
+</HBox>
+
+        <!-- Charts -->
+        <Panel headerText="Top  5 Selling Products" expandable="true"
+           expanded="false">
+             <viz:VizFrame id="idBarChart"
+    uiConfig="{applicationSet:'fiori'}"
+    width="100%"
+    height="400px"
+    vizType="column"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data">
+    <viz:dataset>
+        <viz.data:FlattenedDataset data="{chart>/data}">
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition name="Product" value="{chart>ProductName}" />
+            </viz.data:dimensions>
+            <viz.data:measures>
+                <viz.data:MeasureDefinition name="Quantity Sold" value="{chart>QuantitySold}" />
+            </viz.data:measures>
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+    <viz:feeds>
+        <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Quantity Sold" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" />
+        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Product" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" />
+    </viz:feeds>
+</viz:VizFrame>
+
+        </Panel>
+           <Panel headerText="Orders per Country" expandable="true"
+           expanded="false">
+        <viz:VizFrame id="idCountryChart"
+                      width="100%"
+                      height="400px"
+                      uiConfig="{applicationSet:'fiori'}"
+                      vizType="column">
+          <viz:dataset>
+            <viz.data:FlattenedDataset data="{chartCountry>/data}">
+              <viz.data:dimensions>
+                <viz.data:DimensionDefinition name="Country" value="{chartCountry>Country}" />
+              </viz.data:dimensions>
+              <viz.data:measures>
+                <viz.data:MeasureDefinition name="Orders" value="{chartCountry>Orders}" />
+              </viz.data:measures>
+            </viz.data:FlattenedDataset>
+          </viz:dataset>
+          <viz:feeds>
+            <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Orders" />
+            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Country" />
+          </viz:feeds>
+        </viz:VizFrame>
+</Panel>
+       <Panel headerText="Revenue by Month" expandable="true"
+           expanded="true">
+<viz:VizFrame id="idRevenueChart"
+              width="100%"
+              height="400px"
+              uiConfig="{applicationSet:'fiori'}"
+              vizType="line">
+  <viz:dataset>
+    <viz.data:FlattenedDataset data="{chartRevenue>/data}">
+      <viz.data:dimensions>
+        <viz.data:DimensionDefinition name="Month" value="{chartRevenue>Month}" />
+      </viz.data:dimensions>
+      <viz.data:measures>
+        <viz.data:MeasureDefinition name="Revenue" value="{chartRevenue>Revenue}" />
+      </viz.data:measures>
+    </viz.data:FlattenedDataset>
+  </viz:dataset>
+  <viz:feeds>
+    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Revenue" />
+    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+  </viz:feeds>
+</viz:VizFrame>
+</Panel>
+ </Panel>
+    </VBox>
+   
+    </ScrollContainer>
+</mvc:View>

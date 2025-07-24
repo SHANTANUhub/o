@@ -1,0 +1,55 @@
+<mvc:View
+  controllerName="project3.controller.SettingsView9"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:form="sap.ui.layout.form">
+
+  <Page>
+    <content>
+      <VBox class="sapUiMediumMargin pro">
+ <Panel headerText="Settings" class="sapUiMediumMarginBottom filterPanel ">
+        <!-- User Preferences -->
+        <Panel headerText="User Preferences" expandable="true" expanded="true">
+          <HBox>
+            <Label text="Language:" />
+            <Select id="languageSelect" selectedKey="en" change=".onLanguageChange">
+              <items>
+                <core:Item key="en" text="English" />
+                <core:Item key="de" text="German" />
+                <core:Item key="fr" text="French" />
+              </items>
+            </Select>
+
+            <Label text="Theme:" class="sapUiSmallMarginBegin" />
+            <Select id="themeSelect" selectedKey="sap_horizon" change=".onThemeChange">
+              <items>
+                <core:Item key="sap_horizon" text="Horizon" />
+                <core:Item key="sap_fiori_3" text="Fiori 3" />
+                <core:Item key="sap_belize" text="Belize" />
+              </items>
+            </Select>
+          </HBox>
+        </Panel>
+
+        <!-- Profile Info -->
+        <Panel headerText="Profile Information" expandable="true" expanded="true">
+          <form:SimpleForm editable="false" >
+            <Label text="Name" />
+            <Text text="Shantanu Sharma" />
+            <Label text="Email" />
+            <Text text="sshantanu914@gmail.com" />
+            <Label text="Role" />
+            <Text text="learner" />
+          </form:SimpleForm>
+        </Panel>
+
+        <!-- Notifications -->
+        <Panel headerText="Notifications" expandable="true" expanded="true">
+          <Button id="notificationButton" text="Show Notifications" icon="sap-icon://message-popup" press=".onShowMessages" />
+        </Panel>
+</Panel>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

@@ -1,0 +1,114 @@
+<mvc:View controllerName="project3.controller.ProductListView4"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page id="page" title="Product Details" showNavButton="false">
+        <content>
+            <VBox class="sapUiMediumMargin pro">
+                <!-- Header with search and actions -->
+                    <Panel headerText="Products"
+                        class="sapUiMediumMarginBottom filterPanel ">
+                        <content>
+                            <HBox class="sapUiSmallMargin" gap="1.2rem" justifyContent="SpaceBetween" alignItems="Center">
+                                <HBox justifyContent="Start" alignItems="Center" gap="1rem"
+                                    class="sapUiSmallMargin">
+                                    <SearchField id="searchField"
+                                        search="onSearch"
+                                        width="400px"
+                                        placeholder="Search products, categories, or suppliers..."
+                                        class="sapUiTinyMarginEnd" />
+
+
+                                    <Label text="Sort by:" class="sapUiTinyMarginEnd" />
+                                    <Select width="250px" selectedKey="name" change="onSort"
+                                        class="sapUiTinyMarginEnd">
+                                        <core:Item key="name" text="Name A-Z" />
+                                        <core:Item key="nameDesc" text="Name Z-A" />
+                                        <core:Item key="price" text="Price Low-High" />
+                                        <core:Item key="priceDesc" text="Price High-Low" />
+                                        <core:Item key="stock" text="Stock Low-High" />
+                                        <core:Item key="stockDesc" text="Stock High-Low" />
+                                    </Select>
+
+                                    <Label text="Group by:" class="sapUiTinyMarginEnd" />
+                                    <Select width="220px" change="onGroup"
+                                        class="sapUiTinyMarginEnd">
+                                        <core:Item key="" text="None" />
+                                        <core:Item key="category" text="Category" />
+                                        <core:Item key="supplier" text="Supplier" />
+                                        <core:Item key="stock" text="Stock Level" />
+                                    </Select>
+                                </HBox>
+                                <Button text="Filter" press="onFilterPress" icon="sap-icon://filter" width="150px"
+                                    class="sapUiTinyMarginEnd" />
+                            </HBox>
+                        </content>
+                    
+
+                <!-- Products Table -->
+                <Table id="productsTable"
+                    items="{
+                path: '/Products',
+                parameters: {
+                    expand: 'Category,Supplier'
+                    }
+                    }"
+                  
+                    growing="true"
+                    growingThreshold="50"
+                    updateFinished="onUpdateFinished">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Product Details" />
+                        </Toolbar>
+                    </headerToolbar>
+
+                    <columns>
+                        <Column>
+                            <Text text="Product Name" />
+                        </Column>
+                        <Column>
+                            <Text text="Category" />
+                        </Column>
+                        <Column>
+                            <Text text="Supplier" />
+                        </Column>
+                        <Column>
+                            <Text text="Price" />
+                        </Column>
+                        <Column>
+                            <Text text="Units in Stock" />
+                        </Column>
+                    </columns>
+
+
+                    <items>
+                        <ColumnListItem press="onProductPress" type="Active">
+                            <cells>
+                                <VBox>
+                                    <Text text="{ProductName}" class="sapUiTinyMarginBottom" />
+                                    <Text text="{QuantityPerUnit}" class="sapThemeTextColor6" />
+                                </VBox>
+
+                                <Text text="{Category/CategoryName}" />
+                                <Text text="{Supplier/CompanyName}" />
+
+                                <ObjectNumber
+                                    number="{ parts: ['UnitPrice'],formatter: '.formatCurrency' }"
+                                    unit="USD"
+                                    state="Success" />
+
+                                <ObjectStatus
+                                    text="{UnitsInStock}"
+                                    state="{ path: 'UnitsInStock', formatter: '.formatStockState' }"
+                                    icon="{ path: 'UnitsInStock', formatter: '.formatStockIcon' }" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+
+                </Table>
+                </Panel>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

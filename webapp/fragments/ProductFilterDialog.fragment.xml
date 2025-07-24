@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+    <Dialog id="productFilterDialog"
+        title="Filter Products"
+        contentWidth="400px"
+        resizable="true">
+
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <f:SimpleForm
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false">
+
+                    <f:content>
+                        <core:Title text="Search &amp; Filter" />
+
+                        <Label text="Search:" />
+                        <Input value="{filter>/searchQuery}"
+                            placeholder="Product name, category, supplier..." />
+
+                        <Label text="Category:" />
+                        <Select selectedKey="{filter>/selectedCategory}">
+                            <core:Item key="" text="All Categories" />
+                            <core:Item key="Beverages" text="Beverages" />
+                            <core:Item key="Condiments" text="Condiments" />
+                            <core:Item key="Dairy Products" text="Dairy Products" />
+                            <core:Item key="Grains/Cereals" text="Grains/Cereals" />
+                            <core:Item key="Meat/Poultry" text="Meat/Poultry" />
+                            <core:Item key="Produce" text="Produce" />
+                            <core:Item key="Seafood" text="Seafood" />
+                            <core:Item key="Confections" text="Confections" />
+                        </Select>
+
+                        <Label text="Price Range:" />
+                        <VBox>
+                            <HBox>
+                                <Label text="Min: $" class="sapUiTinyMarginEnd" />
+                                <Input value="{filter>/minPrice}" type="Number" width="80px" />
+                                <Label text="Max: $"
+                                    class="sapUiTinyMarginEnd sapUiSmallMarginBegin" />
+                                <Input value="{filter>/maxPrice}" type="Number" width="80px" />
+                            </HBox>
+                        </VBox>
+
+                        <Label text="Stock Filter:" />
+                        <CheckBox text="Show only low stock items (&lt; 10 units)"
+                            selected="{filter>/lowStockOnly}" />
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+
+        <buttons>
+            <Button text="Apply Filters" press="onFilterDialogConfirm" type="Emphasized" />
+            <Button text="Cancel" press="onFilterDialogCancel" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

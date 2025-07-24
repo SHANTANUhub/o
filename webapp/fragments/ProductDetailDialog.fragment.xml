@@ -1,0 +1,93 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+    <Dialog id="productDetailDialog"
+        title="Product Details"
+        contentWidth="600px"
+        contentHeight="700px"
+        resizable="true"
+        draggable="true">
+
+        <content>
+            <ScrollContainer vertical="true" height="100%">
+                <VBox class="sapUiMediumMargin">
+
+                    <!-- Product Image -->
+                    <HBox justifyContent="Center" class="sapUiMediumMarginBottom">
+                        <Image src="{product>/ProductImage}"
+                            width="250px"
+                            height="250px"
+                            mode="Fit"
+                            decorative="false"
+                            alt="{product>/ProductName}"
+                            class="productDetailImage" />
+                    </HBox>
+
+                    <!-- Product Information Form -->
+                    <f:SimpleForm id="productForm"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false">
+
+                        <f:content>
+                            <!-- Basic Information -->
+                            <core:Title text="Basic Information" />
+
+                            <Label text="Product ID:" />
+                            <Text text="{product>/ProductID}" />
+
+                            <Label text="Product Name:" />
+                            <Text text="{product>/ProductName}" class="sapUiTinyMarginBottom" />
+
+                            <!-- Pricing Information -->
+                            <core:Title text="Pricing Information" />
+
+                            <Label text="Unit Price:" />
+                            <ObjectNumber number="{product>/FormattedPrice}"
+                                emphasized="true"
+                                state="Success" />
+
+                            <Label text="Quantity per Unit:" />
+                            <Text text="{product>/QuantityPerUnit}" />
+
+                            <!-- Stock Information -->
+                            <core:Title text="Stock Information" />
+
+                            <Label text="Units in Stock:" />
+                            <ObjectStatus text="{product>/UnitsInStock}"
+                                state="{product>/StockStatusState}" />
+
+                            <Label text="Stock Status:" />
+                            <Text text="{product>/StockStatus}" />
+
+                            <Label text="Units on Order:" />
+                            <Text text="{product>/UnitsOnOrder}" />
+
+                            <Label text="Reorder Level:" />
+                            <Text text="{product>/ReorderLevel}" />
+
+                            <Label text="Discontinued:" />
+                            <Text text="{product>/DiscontinuedText}" />
+                            
+                            
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </ScrollContainer>
+        </content>
+
+        <buttons>
+            <Button text="Close" press="onCloseProductDialog" type="Emphasized" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

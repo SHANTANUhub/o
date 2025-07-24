@@ -1,0 +1,95 @@
+<mvc:View controllerName="project3.controller.CustomerListView2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page id="page" title="Customer List">
+        <content>
+            <VBox class="sapUiMediumMargin customerListBackground">
+
+                <!-- Simple Filter Section -->
+                <Panel headerText="Search and Filter" class="sapUiMediumMarginBottom filterPanel">
+                    <content>
+                        <HBox class="sapUiSmallMargin" gap="1.2rem" justifyContent="Start" alignItems="Center">
+                            <SearchField id="searchField"
+                                placeholder="Search customers..."
+                                search="onSearch"
+                                width="100%" />
+
+                            <ComboBox id="countryFilter"
+                                placeholder="Filter by Country"
+                                selectionChange="onCountryFilterChange"
+                                width="200px">
+                                <core:Item key="" text="All Countries" />
+                                <core:Item key="USA" text="USA" />
+                                <core:Item key="Germany" text="Germany" />
+                                <core:Item key="UK" text="UK" />
+                                <core:Item key="France" text="France" />
+                            </ComboBox>
+
+                            <ComboBox id="cityFilter"
+                                placeholder="Filter by City"
+                                selectionChange="onCityFilterChange"
+                                width="200px"
+                                class="sapUiMediumMarginEnd">
+                                <core:Item key="" text="All Cities" />
+                                <core:Item key="Berlin" text="Berlin" />
+                                <core:Item key="London" text="London" />
+                                <core:Item key="Paris" text="Paris" />
+                            </ComboBox>
+
+                            <Button text="Create New Customer"
+                                type="Success"
+                                press="onCreateCustomer"
+                                icon="sap-icon://add" />
+
+                        </HBox>
+                    </content>
+                
+
+                <!-- Customer Table -->
+                <Table id="customerTable"
+                    items="{/Customers}"
+                    
+                    growing="true"
+                    growingThreshold="20">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Customer List Table" />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="Customer ID" />
+                        </Column>
+                        <Column>
+                            <Text text="Company Name" />
+                        </Column>
+                        <Column>
+                            <Text text="Contact Name" />
+                        </Column>
+                        <Column>
+                            <Text text="City" />
+                        </Column>
+                        <Column>
+                            <Text text="Country" />
+                        </Column>
+                        <Column>
+                            <Text text="Phone" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem press="onCustomerPress" type="Navigation">
+                            <Text text="{CustomerID}" />
+                            <Text text="{CompanyName}" />
+                            <Text text="{ContactName}" />
+                            <Text text="{City}" />
+                            <Text text="{Country}" />
+                            <Text text="{Phone}" />
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                </Panel>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

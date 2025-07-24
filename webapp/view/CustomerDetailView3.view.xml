@@ -1,0 +1,80 @@
+<mvc:View controllerName="project3.controller.CustomerDetailView3"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page id="customerDetailPage"
+        title="Customer Details"
+        showNavButton="true"
+        navButtonPress="onNavBack">
+        <content>
+            <VBox class="sapUiMediumMargin ">
+
+                <!-- Customer Header -->
+                <ObjectHeader title="{CompanyName}"
+                    number="{CustomerID}"
+                    class="sapUiMediumMarginBottom">
+                    <attributes>
+                        <ObjectAttribute title="Contact" text="{ContactName}" />
+                        <ObjectAttribute title="City" text="{City}" />
+                        <ObjectAttribute title="Country" text="{Country}" />
+                        <ObjectAttribute title="Phone" text="{Phone}" />
+                    </attributes>
+                </ObjectHeader>
+
+                <!-- Simple Form for Customer Details -->
+                <Panel headerText="Customer Information" class="sapUiMediumMarginBottom">
+                    <content>
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+                            class="sapUiMediumMargin">
+                            <f:content>
+                                <!-- Customer ID (non-editable) -->
+                                <Label text="Customer ID:" />
+                                <Input id="customerIDInput" value="{CustomerID}" editable="false" />
+
+                                <!-- Editable fields -->
+                                <Label text="Company Name:" />
+                                <Input id="companyNameInput" value="{CompanyName}" />
+
+                                <Label text="Contact Name:" />
+                                <Input id="contactNameInput" value="{ContactName}" />
+
+                                <Label text="Contact Title:" />
+                                <Input id="contactTitleInput" value="{ContactTitle}" />
+
+                                <Label text="Address:" />
+                                <Input id="addressInput" value="{Address}" />
+
+                                <Label text="City:" />
+                                <Input id="cityInput" value="{City}" />
+
+                                <Label text="Region:" />
+                                <Input id="regionInput" value="{Region}" />
+
+                                <Label text="Postal Code:" />
+                                <Input id="postalCodeInput" value="{PostalCode}" />
+
+                                <Label text="Country:" />
+                                <Input id="countryInput" value="{Country}" />
+
+                                <Label text="Phone:" />
+                                <Input id="phoneInput" value="{Phone}" />
+
+                                <Label text="Fax:" />
+                                <Input id="faxInput" value="{Fax}" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </content>
+                </Panel>
+            </VBox>
+        </content>
+
+        <!-- Footer with Save and Cancel buttons -->
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Save" type="Emphasized" press="onSave" />
+                <Button text="Cancel" press="onCancel" />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

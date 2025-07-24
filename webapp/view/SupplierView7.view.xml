@@ -1,0 +1,39 @@
+<mvc:View controllerName="project3.controller.SupplierView7"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <Page title="Suppliers">
+        <VBox class="sapUiMediumMargin pro">
+
+            <!-- List of Suppliers -->
+            <List
+                id="supplierList"
+                items="{/Suppliers}"
+                mode="SingleSelectMaster"
+                itemPress="onSupplierSelect"
+                class="sapUiResponsiveMargin"
+                headerText="Select a Supplier"
+                width="auto">
+                
+                <items>
+                    <ObjectListItem
+                        title="{CompanyName}"
+                        number="{Country}"
+                        numberUnit="{City}"
+                        icon="sap-icon://factory"
+                        iconDensityAware="false"
+                        type="Active">
+                        
+                        <attributes>
+                            <ObjectAttribute title="Contact" text="{ContactName}" />
+                            <ObjectAttribute title="Phone" text="{Phone}" />
+                            <ObjectAttribute title="Address" text="{Address}" />
+                        </attributes>
+                    </ObjectListItem>
+                </items>
+            </List>
+
+        </VBox>
+    </Page>
+</mvc:View>

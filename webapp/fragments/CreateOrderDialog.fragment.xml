@@ -1,0 +1,99 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+    <Dialog id="createOrderDialog" title="Create New Order" contentWidth="600px">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout" class="sapUiMediumMargin">
+                <f:content>
+                    <!-- Customer Selection -->
+                    <Label text="Customer:" required="true" />
+                    <ComboBox id="newOrderCustomer"
+                        placeholder="Select customer"
+                        items="{/Customers}"
+                        showSecondaryValues="true"
+                        selectedKey="{newOrder>/CustomerID}">
+                        <core:ListItem key="{CustomerID}" text="{CompanyName}"
+                            additionalText="{CustomerID}" />
+                    </ComboBox>
+
+                    <!-- Employee Selection -->
+                    <Label text="Employee (Sales Rep):" required="true" />
+                    <ComboBox id="newOrderEmployee"
+                        placeholder="Select employee"
+                        items="{/Employees}"
+                        selectedKey="{newOrder>/EmployeeID}">
+                        <core:ListItem key="{EmployeeID}" text="{FirstName} {LastName}" />
+                    </ComboBox>
+
+                    <!-- Order Date -->
+                    <Label text="Order Date:" required="true" />
+                    <DatePicker id="newOrderDate"
+                        placeholder="Select order date"
+                        value="{newOrder>/OrderDate}" />
+
+                    <!-- Required Date -->
+                    <Label text="Required Date:" />
+                    <DatePicker id="newRequiredDate"
+                        placeholder="Select required date"
+                        value="{newOrder>/RequiredDate}" />
+
+                    <!-- Ship Via (Shipper) -->
+                    <Label text="Ship Via:" />
+                    <ComboBox id="newOrderShipper"
+                        placeholder="Select shipper"
+                        items="{/Shippers}"
+                        selectedKey="{newOrder>/ShipVia}">
+                        <core:ListItem key="{ShipperID}" text="{CompanyName}" />
+                    </ComboBox>
+
+                    <!-- Freight -->
+                    <Label text="Freight:" />
+                    <Input id="newOrderFreight"
+                        placeholder="Enter freight cost"
+                        value="{newOrder>/Freight}"
+                        type="Number" />
+
+                    <!-- Ship Name -->
+                    <Label text="Ship Name:" />
+                    <Input id="newShipName"
+                        placeholder="Enter ship name"
+                        value="{newOrder>/ShipName}" />
+
+                    <!-- Ship Address -->
+                    <Label text="Ship Address:" />
+                    <Input id="newShipAddress"
+                        placeholder="Enter ship address"
+                        value="{newOrder>/ShipAddress}" />
+
+                    <!-- Ship City -->
+                    <Label text="Ship City:" />
+                    <Input id="newShipCity"
+                        placeholder="Enter ship city"
+                        value="{newOrder>/ShipCity}" />
+
+                    <!-- Ship Region -->
+                    <Label text="Ship Region:" />
+                    <Input id="newShipRegion"
+                        placeholder="Enter ship region"
+                        value="{newOrder>/ShipRegion}" />
+
+                    <!-- Ship Postal Code -->
+                    <Label text="Ship Postal Code:" />
+                    <Input id="newShipPostalCode"
+                        placeholder="Enter postal code"
+                        value="{newOrder>/ShipPostalCode}" />
+
+                    <!-- Ship Country -->
+                    <Label text="Ship Country:" />
+                    <Input id="newShipCountry"
+                        placeholder="Enter ship country"
+                        value="{newOrder>/ShipCountry}" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="Create" type="Emphasized" press="onSaveNewOrder" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onCancelCreateOrder" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

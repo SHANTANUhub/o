@@ -1,0 +1,195 @@
+<mvc:View controllerName="project3.controller.OrderDetailView6"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="page" title="{i18n>orderDetailTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <!-- Order Header Information -->
+            <ObjectHeader id="orderHeader"
+                title="Order #{OrderID}"
+                number="{
+                    path: 'Freight',
+                    type: 'sap.ui.model.type.Currency',
+                    formatOptions: {
+                        showMeasure: false
+                    }
+                }"
+                numberUnit="$"
+                class="sapUiMediumMargin">
+
+                <attributes>
+                    <ObjectAttribute title="Customer" text="{Customer/CompanyName}" />
+                    <ObjectAttribute title="Contact" text="{Customer/ContactName}" />
+                    <ObjectAttribute title="Employee"
+                        text="{Employee/FirstName} {Employee/LastName}" />
+                    <ObjectAttribute title="Order Date"
+                        text="{
+                        path: 'OrderDate',
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                            pattern: 'dd/MM/yyyy'
+                        }
+                    }" />
+                    <ObjectAttribute title="Required Date"
+                        text="{
+                        path: 'RequiredDate',
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                            pattern: 'dd/MM/yyyy'
+                        }
+                    }" />
+                    <ObjectAttribute title="Shipped Date"
+                        text="{
+                        path: 'ShippedDate',
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                            pattern: 'dd/MM/yyyy'
+                        }
+                    }" />
+                </attributes>
+
+                <firstStatus>
+                    <ObjectStatus
+                        text="{
+                        parts: ['ShippedDate'],
+                        formatter: '.formatOrderStatus'
+                    }"
+                        state="{
+                        parts: ['ShippedDate'],
+                        formatter: '.formatOrderStatusState'
+                    }" />
+                </firstStatus>
+            </ObjectHeader>
+
+            <!-- Shipping Information Panel -->
+            <Panel headerText="Shipping Information" expandable="true" expanded="true"
+                class="sapUiMediumMargin">
+                <content>
+                    <f:SimpleForm layout="ResponsiveGridLayout" columnsM="2" columnsL="3"
+                        editable="false">
+                        <f:content>
+                            <Label text="Ship Via:" />
+                            <Text text="{Shipper/CompanyName}" />
+
+                            <Label text="Ship Name:" />
+                            <Text text="{ShipName}" />
+
+                            <Label text="Ship Address:" />
+                            <Text text="{ShipAddress}" />
+
+                            <Label text="Ship City:" />
+                            <Text text="{ShipCity}" />
+
+                            <Label text="Ship Region:" />
+                            <Text text="{ShipRegion}" />
+
+                            <Label text="Ship Postal Code:" />
+                            <Text text="{ShipPostalCode}" />
+
+                            <Label text="Ship Country:" />
+                            <Text text="{ShipCountry}" />
+
+                            <Label text="Freight Cost:" />
+                            <ObjectNumber
+                                number="{
+                                path: 'Freight',
+                                type: 'sap.ui.model.type.Currency',
+                                formatOptions: {
+                                    showMeasure: false
+                                }
+                            }"
+                                unit="$" />
+                        </f:content>
+                    </f:SimpleForm>
+                </content>
+            </Panel>
+
+            <!-- Order Details Table -->
+            <Panel headerText="Order Items" class="sapUiMediumMargin">
+                <content>
+                    <Table id="orderItemsTable"
+                        items="{Order_Details}"
+                        growing="true"
+                        growingThreshold="20">
+
+                        <headerToolbar>
+                            <Toolbar>
+                                <Title text="Items ({Order_Details/length})" level="H3" />
+                                <ToolbarSpacer />
+                                <Text
+                                    text="Total: {
+                                    parts: ['Order_Details'],
+                                    formatter: '.calculateOrderTotal'
+                                } $"
+                                    class="sapUiLargeMarginEnd" />
+                            </Toolbar>
+                        </headerToolbar>
+
+                        <columns>
+                            <Column width="12rem">
+                                <Text text="Product" />
+                            </Column>
+                            <Column width="8rem" demandPopin="true" popinDisplay="Inline"
+                                minScreenWidth="Tablet">
+                                <Text text="Category" />
+                            </Column>
+                            <Column width="6rem" hAlign="End">
+                                <Text text="Unit Price" />
+                            </Column>
+                            <Column width="6rem" hAlign="Center">
+                                <Text text="Quantity" />
+                            </Column>
+                            <Column width="6rem" hAlign="End">
+                                <Text text="Discount" />
+                            </Column>
+                            <Column width="8rem" hAlign="End">
+                                <Text text="Total" />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <VBox>
+                                        <Text text="{Product/ProductName}"
+                                            class="sapUiTinyMarginBottom" />
+                                        <Text text="Supplier: {Product/Supplier/CompanyName}"
+                                            class="sapUiContentLabelColor" />
+                                    </VBox>
+
+                                    <Text text="{Product/Category/CategoryName}" />
+
+                                    <ObjectNumber
+                                        number="{
+                                        path: 'UnitPrice',
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {
+                                            showMeasure: false
+                                        }
+                                    }"
+                                        unit="$" />
+
+                                    <ObjectNumber number="{Quantity}" emphasized="false" />
+
+                                    <Text
+                                        text="{
+                                        path: 'Discount',
+                                        formatter: '.formatDiscount'
+                                    }" />
+
+                                    <ObjectNumber
+                                        number="{
+                                        parts: ['UnitPrice', 'Quantity', 'Discount'],
+                                        formatter: '.calculateLineTotal'
+                                    }"
+                                        unit="$" state="Success" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </content>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

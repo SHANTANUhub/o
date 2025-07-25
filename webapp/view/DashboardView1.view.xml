@@ -62,7 +62,7 @@
                     </GenericTile>
 
                     <GenericTile header="Pending Deliveries" subheader="Not Shipped"
-                        class="sapUiTinyMargin kpiTile ">
+                        class="sapUiTinyMargin kpiTile " press="onNavigateToSuppliers">
                         <TileContent>
                             <NumericContent value="{dashboard>/dashboard/PendingDeliveries}"
                                 icon="sap-icon://pending" iconDescription="Pending" />
@@ -70,7 +70,7 @@
                     </GenericTile>
 
                     <GenericTile header="Customer Satisfaction" subheader="Score (%)"
-                        class="sapUiTinyMargin kpiTile ">
+                        class="sapUiTinyMargin kpiTile " press="onNavigateToCustomers">
                         <TileContent>
                             <NumericContent value="{dashboard>/dashboard/CustomerSatisfaction}"
                                 icon="sap-icon://customer" iconDescription="Satisfaction" />

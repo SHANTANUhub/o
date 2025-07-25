@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "public": "webapp",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
